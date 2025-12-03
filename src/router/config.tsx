@@ -7,11 +7,18 @@ import Category from "../pages/category/page";
 import Categories from "../pages/categories/page";
 import Contact from "../pages/contact/page";
 import ManageArticles from "../pages/manage-articles/page";
+import ManageCategories from "../pages/manage-categories/page";
+import Login from "../pages/login/page";
+import About from "../pages/about/page";
 
 const routes: RouteObject[] = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <About />,
   },
   {
     path: "/article/:id",
@@ -26,6 +33,10 @@ const routes: RouteObject[] = [
     element: <ManageArticles />,
   },
   {
+    path: "/manage-categories",
+    element: <ManageCategories />,
+  },
+  {
     path: "/categories",
     element: <Categories />,
   },
@@ -36,6 +47,10 @@ const routes: RouteObject[] = [
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "*",

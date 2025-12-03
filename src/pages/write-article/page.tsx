@@ -27,6 +27,15 @@ export default function WriteArticle() {
     readTime: 5
   });
 
+  // Check if user is logged in
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+  }, [navigate]);
+
   // Load draft from localStorage on mount
   useEffect(() => {
     const savedDraft = localStorage.getItem('article_draft');

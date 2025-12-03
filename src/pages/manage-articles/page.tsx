@@ -33,6 +33,15 @@ export default function ManageArticles() {
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
+  // Check if user is logged in
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+  }, [navigate]);
+
   const categories = [
     'Lối Sống Xanh',
     'Biến Đổi Khí Hậu',
@@ -44,6 +53,27 @@ export default function ManageArticles() {
     'Kiến Trúc Xanh',
     'Xử Lý Chất Thải',
     'Cấp Phép Giấy Phép Môi Trường'
+  ];
+
+  // Load custom categories from localStorage
+  const [customCategories, setCustomCategories] = useState<Array<{ name: string }>>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('custom_categories');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setCustomCategories(parsed);
+      } catch (error) {
+        console.error('Error loading custom categories:', error);
+      }
+    }
+  }, []);
+
+  // Combine default and custom categories
+  const allCategories = [
+    ...categories,
+    ...customCategories.map(cat => cat.name)
   ];
 
   useEffect(() => {
@@ -62,46 +92,18 @@ export default function ManageArticles() {
     filterAndSortArticles();
   }, [articles, searchQuery, selectedCategory, sortBy]);
 
-const loadArticles = async () => {
-  try {
-    // 1. Tạo Query (Truy vấn) đến collection 'published_articles'
-    const articlesCollectionRef = collection(db, 'published_articles');
-    // Tùy chọn: Thêm orderBy để sắp xếp theo trường nào đó
-    const q = query(articlesCollectionRef /*, orderBy('createdAt', 'desc')*/);
-
-    // 2. Sử dụng getDocs để tải dữ liệu một lần duy nhất
-    const querySnapshot = await getDocs(q);
-
-    const articlesList: Article[] = [];
-
-    // Lặp qua từng tài liệu (document) trong snapshot
-    querySnapshot.forEach((doc) => {
-      // Lấy dữ liệu và thêm ID của document (rất quan trọng)
-      const data = doc.data() as Partial<Article>;
-      articlesList.push({
-        id: doc.id,
-        title: data.title || '',
-        category: data.category || '',
-        content: data.content || '',
-        excerpt: data.excerpt || '',
-        featuredImage: data.featuredImage || '',
-        tags: data.tags || [],
-        author: data.author || '',
-        readTime: data.readTime || 0,
-        publishedAt: data.publishedAt || new Date().toISOString(),
-        status: data.status || ''
-      });
-    });
-
-    // 3. Cập nhật State
-    setArticles(articlesList);
-    console.log('Đã tải danh sách bài viết từ Firestore.');
-
-  } catch (error) {
-    console.error('Lỗi khi tải danh sách bài viết từ Firestore:', error);
-    showToastMessage('Lỗi khi tải danh sách bài viết', 'error');
-  }
-};
+  const loadArticles = () => {
+    try {
+      const stored = localStorage.getItem('published_articles');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setArticles(parsed);
+      }
+    } catch (error) {
+      console.error('Error loading articles:', error);
+      showToastMessage('Lỗi khi tải danh sách bài viết', 'error');
+    }
+  };
 
   const filterAndSortArticles = () => {
     let filtered = [...articles];

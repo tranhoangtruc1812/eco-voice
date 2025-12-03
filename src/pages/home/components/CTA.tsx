@@ -20,7 +20,7 @@ export default function CTA() {
           cho môi trường mỗi ngày
         </p>
         <Link 
-          to="/join" 
+          to="/contact" 
           className="inline-flex items-center gap-4 px-10 py-5 bg-black text-white font-bold rounded-full hover:bg-gray-900 transition-all cursor-pointer whitespace-nowrap group"
         >
           <div className="w-12 h-12 flex items-center justify-center bg-orange-400 rounded-full">

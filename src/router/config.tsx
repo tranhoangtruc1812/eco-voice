@@ -6,6 +6,7 @@ import WriteArticle from "../pages/write-article/page";
 import Category from "../pages/category/page";
 import Categories from "../pages/categories/page";
 import Contact from "../pages/contact/page";
+import ManageArticles from "../pages/manage-articles/page";
 
 const routes: RouteObject[] = [
   {
@@ -19,6 +20,10 @@ const routes: RouteObject[] = [
   {
     path: "/write",
     element: <WriteArticle />,
+  },
+  {
+    path: "/manage",
+    element: <ManageArticles />,
   },
   {
     path: "/categories",

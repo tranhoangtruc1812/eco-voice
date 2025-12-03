@@ -31,6 +31,9 @@ export default function Navbar({ isScrolled }: NavbarProps) {
             <Link to="/write" className={`text-sm font-medium transition-colors hover:text-emerald-600 ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
               Đăng Bài
             </Link>
+            <Link to="/manage" className={`text-sm font-medium transition-colors hover:text-emerald-600 ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+              Quản Lý
+            </Link>
             <Link to="/contact" className={`text-sm font-medium transition-colors hover:text-emerald-600 ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
               Liên Hệ
             </Link>

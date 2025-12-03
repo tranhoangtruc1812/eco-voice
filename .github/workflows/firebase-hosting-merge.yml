@@ -6,15 +6,32 @@ on:
   push:
     branches:
       - main
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm run build
+
+      # --- BƯỚC CẦN THIẾT: THIẾT LẬP NODE.JS VÀ CÀI ĐẶT PHỤ THUỘC ĐỂ KHẮC PHỤC LỖI BUILD ---
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' 
+      - name: Install Dependencies
+        run: npm install
+        
+      # --- CHẠY BUILD ---
+      - name: Run npm run build
+        run: npm run build
+        
+      # --- BƯỚC DEPLOY LÊN LIVE CHANNEL KHI MERGE VÀO MAIN ---
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ECO_VOICE }}
-          channelId: live
+          channelId: live # Triển khai lên kênh production (live)
           projectId: eco-voice

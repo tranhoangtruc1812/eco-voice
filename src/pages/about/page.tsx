@@ -14,79 +14,79 @@ export default function About() {
 
   const teamMembers = [
     {
-      name: 'Nguyễn Minh Anh',
-      role: 'Nhà Sáng Lập & Biên Tập Viên Trưởng',
-      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20woman%20environmental%20activist%20wearing%20casual%20green%20clothing%20smiling%20confidently%20portrait%20photography%20natural%20lighting%20simple%20clean%20white%20background%20modern%20professional%20headshot%20warm%20friendly%20expression&width=400&height=400&seq=team-001&orientation=squarish',
-      description: 'Chuyên gia về biến đổi khí hậu với hơn 10 năm kinh nghiệm trong lĩnh vực bảo vệ môi trường'
+      name: 'Nguyễn Văn Minh',
+      role: 'Giám Đốc Kỹ Thuật',
+      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20male%20environmental%20engineer%20wearing%20safety%20vest%20and%20helmet%20confident%20smile%20industrial%20wastewater%20treatment%20plant%20background%20modern%20facility%20expert%20leader&width=400&height=400&seq=team-001&orientation=squarish',
+      description: 'Kỹ sư môi trường cao cấp với hơn 15 năm kinh nghiệm trong lĩnh vực xử lý chất thải công nghiệp'
     },
     {
-      name: 'Trần Hoàng Nam',
-      role: 'Chuyên Gia Năng Lượng Tái Tạo',
-      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20man%20renewable%20energy%20expert%20wearing%20casual%20shirt%20smiling%20warmly%20portrait%20photography%20natural%20lighting%20simple%20clean%20white%20background%20modern%20professional%20headshot%20confident%20expression&width=400&height=400&seq=team-002&orientation=squarish',
-      description: 'Kỹ sư năng lượng với nhiều dự án thành công về năng lượng sạch và bền vững'
+      name: 'Trần Thị Hương',
+      role: 'Chuyên Gia Xử Lý Nước Thải',
+      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20female%20water%20treatment%20specialist%20wearing%20lab%20coat%20and%20safety%20glasses%20confident%20expression%20modern%20laboratory%20background%20environmental%20engineer&width=400&height=400&seq=team-002&orientation=squarish',
+      description: 'Chuyên gia hàng đầu về công nghệ xử lý nước thải sinh hoạt và công nghiệp, đạt chuẩn QCVN'
     },
     {
-      name: 'Lê Thu Hà',
-      role: 'Chuyên Gia Bảo Tồn Thiên Nhiên',
-      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20woman%20nature%20conservationist%20wearing%20outdoor%20clothing%20smiling%20gently%20portrait%20photography%20natural%20lighting%20simple%20clean%20white%20background%20modern%20professional%20headshot%20peaceful%20expression&width=400&height=400&seq=team-003&orientation=squarish',
-      description: 'Nhà sinh học với đam mê bảo vệ đa dạng sinh học và các hệ sinh thái tự nhiên'
+      name: 'Lê Hoàng Nam',
+      role: 'Chuyên Gia Tái Chế',
+      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20male%20recycling%20expert%20wearing%20casual%20work%20attire%20confident%20smile%20modern%20recycling%20facility%20background%20waste%20management%20specialist&width=400&height=400&seq=team-003&orientation=squarish',
+      description: 'Chuyên gia về công nghệ tái chế chất thải rắn và xây dựng mô hình kinh tế tuần hoàn'
     },
     {
-      name: 'Phạm Đức Thắng',
-      role: 'Chuyên Gia Kinh Tế Xanh',
-      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20man%20green%20economy%20expert%20wearing%20business%20casual%20attire%20smiling%20professionally%20portrait%20photography%20natural%20lighting%20simple%20clean%20white%20background%20modern%20professional%20headshot%20intelligent%20expression&width=400&height=400&seq=team-004&orientation=squarish',
-      description: 'Chuyên gia tư vấn về phát triển bền vững và kinh tế tuần hoàn cho doanh nghiệp'
+      name: 'Phạm Thu Lan',
+      role: 'Chuyên Gia Cấp Phép Môi Trường',
+      image: 'https://readdy.ai/api/search-image?query=professional%20asian%20female%20environmental%20consultant%20wearing%20business%20attire%20confident%20expression%20modern%20office%20background%20legal%20compliance%20expert&width=400&height=400&seq=team-004&orientation=squarish',
+      description: 'Chuyên gia tư vấn pháp lý môi trường, hỗ trợ doanh nghiệp đạt chuẩn và cấp phép'
     }
   ];
 
   const milestones = [
     {
+      year: '2009',
+      title: 'Thành Lập Công Ty',
+      description: 'WasteManage được thành lập với sứ mệnh cung cấp giải pháp xử lý chất thải chuyên nghiệp cho doanh nghiệp Việt Nam'
+    },
+    {
+      year: '2012',
+      title: 'Mở Rộng Dịch Vụ',
+      description: 'Triển khai thành công 50+ dự án xử lý nước thải và chất thải rắn cho các khu công nghiệp'
+    },
+    {
+      year: '2016',
+      title: 'Công Nghệ Tiên Tiến',
+      description: 'Hợp tác với đối tác Nhật Bản, ứng dụng công nghệ xử lý chất thải hiện đại nhất'
+    },
+    {
       year: '2020',
-      title: 'Khởi Đầu Hành Trình',
-      description: 'EcoVoice được thành lập với sứ mệnh nâng cao nhận thức về bảo vệ môi trường tại Việt Nam'
-    },
-    {
-      year: '2021',
-      title: 'Mở Rộng Cộng Đồng',
-      description: 'Đạt 50,000 thành viên tích cực và tổ chức 20+ sự kiện bảo vệ môi trường'
-    },
-    {
-      year: '2022',
-      title: 'Hợp Tác Chiến Lược',
-      description: 'Hợp tác với các tổ chức môi trường quốc tế và triển khai nhiều dự án xanh'
-    },
-    {
-      year: '2023',
-      title: 'Tác Động Lan Tỏa',
-      description: 'Hơn 200,000 người tham gia và góp phần giảm 5,000 tấn CO2 mỗi năm'
+      title: 'Chứng Nhận Quốc Tế',
+      description: 'Đạt chứng nhận ISO 14001 về hệ thống quản lý môi trường và ISO 9001 về chất lượng'
     },
     {
       year: '2024',
-      title: 'Tương Lai Xanh',
-      description: 'Tiếp tục mở rộng và xây dựng cộng đồng bền vững cho thế hệ tương lai'
+      title: 'Dẫn Đầu Ngành',
+      description: 'Hơn 500 dự án thành công, phục vụ các tập đoàn lớn và khu công nghiệp trên toàn quốc'
     }
   ];
 
   const values = [
     {
-      icon: 'ri-leaf-line',
-      title: 'Bền Vững',
-      description: 'Cam kết hành động vì một tương lai xanh và bền vững cho mọi thế hệ'
+      icon: 'ri-shield-check-line',
+      title: 'Chuyên Nghiệp',
+      description: 'Đội ngũ kỹ sư giàu kinh nghiệm, quy trình làm việc chuẩn quốc tế'
     },
     {
-      icon: 'ri-team-line',
-      title: 'Cộng Đồng',
-      description: 'Xây dựng cộng đồng gắn kết, cùng nhau hành động vì môi trường'
+      icon: 'ri-leaf-line',
+      title: 'Bền Vững',
+      description: 'Cam kết bảo vệ môi trường, phát triển bền vững cho cộng đồng'
     },
     {
       icon: 'ri-lightbulb-line',
-      title: 'Sáng Tạo',
-      description: 'Tìm kiếm giải pháp sáng tạo và hiệu quả cho các vấn đề môi trường'
+      title: 'Công Nghệ',
+      description: 'Ứng dụng công nghệ tiên tiến, hiệu quả cao, tiết kiệm chi phí'
     },
     {
-      icon: 'ri-heart-line',
-      title: 'Trách Nhiệm',
-      description: 'Hành động với trách nhiệm và tận tâm vì hành tinh của chúng ta'
+      icon: 'ri-customer-service-line',
+      title: 'Tận Tâm',
+      description: 'Hỗ trợ khách hàng 24/7, bảo hành dài hạn, bảo trì định kỳ'
     }
   ];
 
@@ -97,17 +97,19 @@ export default function About() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
+          className="absolute inset-0 bg-cover bg-center bg-gray opacity-50"
           style={{
-            backgroundImage: `url('https://readdy.ai/api/search-image?query=beautiful%20green%20earth%20planet%20from%20space%20with%20lush%20forests%20and%20blue%20oceans%20environmental%20protection%20concept%20hope%20for%20future%20simple%20clean%20background%20peaceful%20atmosphere%20inspiring%20view&width=1920&height=800&seq=about-hero-001&orientation=landscape')`
+            backgroundImage: `url('https://readdy.ai/api/search-image?query=modern%20industrial%20wastewater%20treatment%20facility%20with%20advanced%20filtration%20systems%20clean%20professional%20environment%20blue%20water%20treatment%20tanks%20environmental%20technology%20aerial%20view%20bright%20daylight%20professional%20photography&width=1920&height=800&seq=about-hero-bg-001&orientation=landscape')`
           }}
         ></div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Về EcoVoice
+            Về Ecovoice
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Chúng tôi là cộng đồng những người yêu thiên nhiên, tin tưởng vào sức mạnh của hành động tập thể và cam kết xây dựng một tương lai xanh bền vững cho hành tinh của chúng ta
+            Chúng tôi là đơn vị tiên phong trong lĩnh vực xử lý chất thải tại Việt Nam, 
+            cung cấp giải pháp toàn diện từ tư vấn, thiết kế, thi công đến vận hành 
+            hệ thống xử lý môi trường cho mọi quy mô doanh nghiệp
           </p>
         </div>
       </section>
@@ -121,23 +123,27 @@ export default function About() {
                 Sứ Mệnh Của Chúng Tôi
               </h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                EcoVoice ra đời với sứ mệnh nâng cao nhận thức cộng đồng về bảo vệ môi trường thông qua việc chia sẻ kiến thức, truyền cảm hứng hành động và kết nối những người có cùng chung tầm nhìn về một hành tinh xanh.
+                WasteManage ra đời với sứ mệnh mang đến giải pháp xử lý chất thải chuyên nghiệp, 
+                hiệu quả và bền vững cho các doanh nghiệp Việt Nam. Chúng tôi cam kết giúp khách hàng 
+                tuân thủ đầy đủ các quy định về môi trường, đồng thời tối ưu hóa chi phí vận hành.
               </p>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Chúng tôi tin rằng mỗi hành động nhỏ đều có ý nghĩa lớn. Từ việc giảm thiểu rác thải nhựa, tiết kiệm năng lượng, đến việc trồng cây và bảo vệ đa dạng sinh học - tất cả đều góp phần tạo nên sự thay đổi tích cực cho môi trường.
+                Với đội ngũ kỹ sư môi trường giàu kinh nghiệm và công nghệ tiên tiến từ Nhật Bản, 
+                Châu Âu, chúng tôi tự hào là đối tác tin cậy của hơn 500 doanh nghiệp trong việc 
+                xây dựng hệ thống xử lý chất thải đạt chuẩn quốc tế.
               </p>
               <Link 
                 to="/contact" 
                 className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-full hover:bg-emerald-700 transition-all cursor-pointer whitespace-nowrap"
               >
-                Liên Hệ Với Chúng Tôi
+                Liên Hệ Tư Vấn Miễn Phí
                 <i className="ri-arrow-right-line"></i>
               </Link>
             </div>
             <div 
               className="w-full h-96 rounded-2xl shadow-2xl bg-cover bg-center"
               style={{
-                backgroundImage: `url('https://readdy.ai/api/search-image?query=diverse%20group%20of%20people%20planting%20trees%20together%20community%20environmental%20action%20volunteers%20working%20in%20garden%20teamwork%20for%20nature%20conservation%20simple%20clean%20background%20natural%20lighting%20hopeful%20atmosphere&width=600&height=600&seq=about-mission-001&orientation=squarish')`
+                backgroundImage: `url('https://readdy.ai/api/search-image?query=engineers%20inspecting%20modern%20waste%20treatment%20facility%20team%20of%20professionals%20in%20safety%20gear%20checking%20industrial%20wastewater%20system%20advanced%20environmental%20technology%20clean%20industrial%20setting&width=600&height=600&seq=about-mission-001&orientation=squarish')`
               }}
             ></div>
           </div>
@@ -152,7 +158,7 @@ export default function About() {
               Giá Trị Cốt Lõi
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Những giá trị định hướng mọi hành động của chúng tôi vì một tương lai xanh
+              Những giá trị định hướng mọi hoạt động của chúng tôi trong việc phục vụ khách hàng
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -181,10 +187,10 @@ export default function About() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Hành Trình Của Chúng Tôi
+              Hành Trình Phát Triển
             </h2>
             <p className="text-lg text-gray-600">
-              Những cột mốc quan trọng trong sứ mệnh bảo vệ môi trường
+              Những cột mốc quan trọng trong 15 năm phát triển của WasteManage
             </p>
           </div>
           <div className="relative">
@@ -216,10 +222,10 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Đội Ngũ Của Chúng Tôi
+              Đội Ngũ Chuyên Gia
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Những chuyên gia tận tâm với sứ mệnh bảo vệ môi trường và xây dựng tương lai bền vững
+              Những kỹ sư môi trường hàng đầu với kinh nghiệm thực tế tại các dự án lớn
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -251,25 +257,25 @@ export default function About() {
       <section className="py-20 px-6 bg-gradient-to-br from-emerald-600 to-teal-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Cùng Nhau Tạo Nên Sự Khác Biệt
+            Sẵn Sàng Hợp Tác Cùng Chúng Tôi?
           </h2>
           <p className="text-xl text-white/90 mb-8 leading-relaxed">
-            Tham gia cộng đồng EcoVoice để cùng nhau hành động vì một hành tinh xanh hơn. Mỗi bước đi nhỏ của bạn đều có ý nghĩa lớn!
+            Liên hệ ngay để nhận tư vấn miễn phí về giải pháp xử lý chất thải phù hợp nhất cho doanh nghiệp của bạn
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link 
-              to="/categories" 
+              to="/contact" 
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-600 font-semibold rounded-full hover:bg-gray-100 transition-all cursor-pointer whitespace-nowrap"
             >
-              Khám Phá Bài Viết
-              <i className="ri-article-line"></i>
+              Liên Hệ Ngay
+              <i className="ri-phone-line"></i>
             </Link>
             <Link 
-              to="/write" 
+              to="/categories" 
               className="inline-flex items-center gap-2 px-8 py-4 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 transition-all cursor-pointer whitespace-nowrap"
             >
-              Chia Sẻ Câu Chuyện
-              <i className="ri-edit-line"></i>
+              Xem Dịch Vụ
+              <i className="ri-folder-line"></i>
             </Link>
           </div>
         </div>

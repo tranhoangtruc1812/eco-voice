@@ -4,7 +4,7 @@ import Navbar from '../home/components/Navbar';
 import Footer from '../home/components/Footer';
 
 export default function Categories() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(true);
 
   const defaultCategories = [
     {
@@ -131,7 +131,7 @@ export default function Categories() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar isScrolled={isScrolled} />
+      <Navbar isScrolled={true} />
 
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-6">

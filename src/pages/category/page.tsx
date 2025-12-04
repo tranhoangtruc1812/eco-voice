@@ -14,68 +14,80 @@ interface Article {
   date: string;
   image?: string;
   readTime?: number;
+  excerpt?: string;
+  publishedAt?: string;
 }
 
-const categoryInfo: Record<string, { name: string; description: string; icon: string; color: string }> = {
+const categoryInfo: Record<string, { name: string; description: string; icon: string; color: string; bgColor?: string }> = {
   'climate-change': {
     name: 'Biến Đổi Khí Hậu',
     description: 'Tìm hiểu về biến đổi khí hậu toàn cầu, nguyên nhân, tác động và các giải pháp ứng phó hiệu quả',
     icon: 'ri-temp-hot-line',
-    color: 'from-orange-500 to-red-500'
+    color: 'from-orange-500 to-red-500',
+    bgColor: 'bg-orange-50'
   },
   'renewable-energy': {
     name: 'Năng Lượng Tái Tạo',
     description: 'Khám phá các nguồn năng lượng sạch như năng lượng mặt trời, gió, thủy điện và sinh khối',
     icon: 'ri-sun-line',
-    color: 'from-yellow-500 to-orange-500'
+    color: 'from-yellow-500 to-orange-500',
+    bgColor: 'bg-yellow-50'
   },
   'nature-conservation': {
     name: 'Bảo Tồn Thiên Nhiên',
     description: 'Bảo vệ đa dạng sinh học, hệ sinh thái và các loài động thực vật quý hiếm',
     icon: 'ri-leaf-line',
-    color: 'from-green-500 to-emerald-500'
+    color: 'from-green-500 to-emerald-500',
+    bgColor: 'bg-green-50'
   },
   'pollution': {
     name: 'Ô Nhiễm Môi Trường',
     description: 'Nhận biết các dạng ô nhiễm không khí, nước, đất và cách giảm thiểu tác động',
     icon: 'ri-mist-line',
-    color: 'from-gray-500 to-slate-600'
+    color: 'from-gray-500 to-slate-600',
+    bgColor: 'bg-gray-50'
   },
   'sustainable-living': {
     name: 'Sống Bền Vững',
     description: 'Áp dụng lối sống thân thiện với môi trường trong cuộc sống hàng ngày',
     icon: 'ri-recycle-line',
-    color: 'from-teal-500 to-cyan-500'
+    color: 'from-teal-500 to-cyan-500',
+    bgColor: 'bg-teal-50'
   },
   'ocean-protection': {
     name: 'Bảo Vệ Đại Dương',
     description: 'Giữ gìn đại dương, bảo vệ sinh vật biển và chống ô nhiễm nhựa',
     icon: 'ri-water-flash-line',
-    color: 'from-blue-500 to-indigo-500'
+    color: 'from-blue-500 to-indigo-500',
+    bgColor: 'bg-blue-50'
   },
   'forest-protection': {
     name: 'Bảo Vệ Rừng',
     description: 'Chống phá rừng, trồng cây xanh và bảo vệ lá phổi xanh của hành tinh',
     icon: 'ri-plant-line',
-    color: 'from-lime-500 to-green-600'
+    color: 'from-lime-500 to-green-600',
+    bgColor: 'bg-lime-50'
   },
   'recycling': {
     name: 'Tái Chế & Giảm Rác',
     description: 'Tái chế vật liệu, giảm thiểu rác thải và xây dựng nền kinh tế tuần hoàn',
     icon: 'ri-delete-bin-line',
-    color: 'from-emerald-500 to-teal-500'
+    color: 'from-emerald-500 to-teal-500',
+    bgColor: 'bg-emerald-50'
   },
   'waste-management': {
     name: 'Xử Lý Chất Thải',
     description: 'Quản lý và xử lý chất thải rắn, lỏng, khí một cách hiệu quả và an toàn',
     icon: 'ri-delete-bin-2-line',
-    color: 'from-amber-500 to-orange-600'
+    color: 'from-amber-500 to-orange-600',
+    bgColor: 'bg-amber-50'
   },
   'environmental-permits': {
     name: 'Cấp Phép Giấy Phép Môi Trường',
     description: 'Hướng dẫn thủ tục, quy định pháp lý về giấy phép môi trường cho doanh nghiệp',
     icon: 'ri-file-list-3-line',
-    color: 'from-indigo-500 to-blue-600'
+    color: 'from-indigo-500 to-blue-600',
+    bgColor: 'bg-indigo-50'
   }
 };
 
@@ -185,10 +197,10 @@ export default function Category() {
       <Navbar isScrolled={isScrolled} />
       
       {/* Hero Section */}
-      <section className={`${currentCategory.color || 'bg-gray-50'} pt-32 pb-20`}>
+      <section className={`${currentCategory.bgColor || 'bg-gray-50'} pt-32 pb-20`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className={`w-16 h-16 flex items-center justify-center ${currentCategory.color || 'bg-gray-100'} rounded-2xl`}>
+            <div className={`w-16 h-16 flex items-center justify-center ${currentCategory.bgColor || 'bg-gray-100'} rounded-2xl`}>
               <i className={`${currentCategory.icon} text-4xl ${currentCategory.color}`}></i>
             </div>
             <div>
@@ -280,24 +292,24 @@ export default function Category() {
                         />
                       </div>
                     ) : (
-                      <div className={`w-full h-48 ${currentCategory.color || 'bg-gray-100'} flex items-center justify-center`}>
+                      <div className={`w-full h-48 ${currentCategory.bgColor || 'bg-gray-100'} flex items-center justify-center`}>
                         <i className={`${currentCategory.icon} text-6xl ${currentCategory.color}`}></i>
                       </div>
                     )}
                     <div className="p-6">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className={`px-3 py-1 ${currentCategory.color || 'bg-gray-100'} ${currentCategory.color} rounded-full text-xs font-medium whitespace-nowrap`}>
+                        <span className={`px-3 py-1 ${currentCategory.bgColor || 'bg-gray-100'} ${currentCategory.color} rounded-full text-xs font-medium whitespace-nowrap`}>
                           {article.category}
                         </span>
                         <span className="text-xs text-gray-500">
-                          {/* {new Date(article.date || article.publishedAt).toLocaleDateString('vi-VN')} */}
+                          {new Date(article.publishedAt || article.date).toLocaleDateString('vi-VN')}
                         </span>
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors line-clamp-2">
                         {article.title}
                       </h3>
                       <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                        {/* {article.description || article.excerpt} */}
+                        {article.excerpt || article.description}
                       </p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -335,7 +347,7 @@ export default function Category() {
                 <Link
                   key={key}
                   to={`/category/${key}`}
-                  className={`${cat.color || 'bg-gray-100'} rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group`}
+                  className={`${cat.bgColor || 'bg-gray-100'} rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group`}
                 >
                   <div className={`w-12 h-12 flex items-center justify-center mb-4`}>
                     <i className={`${cat.icon} text-3xl ${cat.color}`}></i>

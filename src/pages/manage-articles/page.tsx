@@ -266,7 +266,7 @@ export default function ManageArticles() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Danh Mục</p>
-                    <p className="text-2xl font-bold text-gray-900">{categories.length}</p>
+                    <p className="text-2xl font-bold text-gray-900">{allCategories.length}</p>
                   </div>
                 </div>
               </div>
@@ -313,7 +313,7 @@ export default function ManageArticles() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500 text-sm cursor-pointer"
                 >
                   <option value="all">Tất Cả Danh Mục</option>
-                  {categories.map((cat) => (
+                  {allCategories.map((cat) => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>

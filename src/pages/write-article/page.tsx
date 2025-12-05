@@ -6,9 +6,9 @@ import Footer from '../home/components/Footer';
 import ArticleEditor from './components/ArticleEditor';
 import ArticlePreview from './components/ArticlePreview';
 
-import { db } from '../../config/firebase'; // Đảm bảo đường dẫn chính xác đến tệp cấu hình Firebase của bạn
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
-
+import { db, auth } from '../../config/firebase'; // Đảm bảo đường dẫn chính xác đến tệp cấu hình Firebase của bạn
+import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 export default function WriteArticle() {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,7 +16,9 @@ export default function WriteArticle() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState<'success' | 'error'>('success');
+  const [isEditing, setIsEditing] = useState(false);
   const [articleData, setArticleData] = useState({
+    id: '',
     title: '',
     category: 'Lối Sống Xanh',
     content: '',
@@ -29,11 +31,18 @@ export default function WriteArticle() {
 
   // Check if user is logged in
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-      navigate('/login');
-      return;
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/login');
+      } else {
+        setArticleData(prev => ({
+          ...prev,
+          author: user.email || 'Người dùng'
+        }));
+      }
+    });
+
+    return () => unsubscribe();
   }, [navigate]);
 
   // Load draft from localStorage on mount
@@ -78,74 +87,105 @@ export default function WriteArticle() {
   };
 
   const handleSaveDraft = async () => {
-  // Kiểm tra User ID để đảm bảo có nơi lưu bản nhá
+    // Kiểm tra User ID để đảm bảo có nơi lưu bản nhá
 
-  try {
-    // 1. Chuẩn bị dữ liệu bản nháp
-    const draftData = {
-      ...articleData,
-      // Lưu lại timestamp lần cuối cùng lưu
-      savedAt: new Date().toISOString(), 
-      status: 'draft',
+    try {
+      // 1. Chuẩn bị dữ liệu bản nháp
+      const draftData = {
+        ...articleData,
+        // Lưu lại timestamp lần cuối cùng lưu
+        savedAt: new Date().toISOString(), 
+        status: 'draft',
+      };
+
+      // 2. LƯU BẢN NHÁP VÀO FIRESTORE
+      // Sử dụng setDoc để tạo hoặc ghi đè tài liệu.
+      // Tên collection: 'article_drafts'
+      // ID của document: userId (đảm bảo mỗi người dùng chỉ có một bản nháp)
+      await addDoc(collection(db, 'article_drafts'), draftData);
+
+      // 3. (Tùy chọn) Xóa các mục lưu trữ cục bộ cũ
+      localStorage.removeItem('article_draft');
+      localStorage.removeItem('article_draft_timestamp');
+
+      showToastMessage('Bản nháp đã được lưu thành công trên đám mây!', 'success');
+      
+    } catch (error) {
+      console.error('Lỗi khi lưu bản nháp lên Firebase:', error);
+      showToastMessage('Lỗi khi lưu bản nháp', 'error');
+    }
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) return; // Write new article
+
+    const loadArticleForEdit = async () => {
+      try {
+        const docRef = doc(db, "published_articles", id);
+        const snap = await getDoc(docRef);
+
+        if (snap.exists()) {
+          setArticleData({
+            ...snap.data(),
+            id: snap.id
+          });
+          setIsEditing(true);
+          showToastMessage("Đang chỉnh sửa bài viết", "success");
+        }
+      } catch (error) {
+        console.error("Error loading article:", error);
+        showToastMessage("Không thể tải bài viết để chỉnh sửa", "error");
+      }
     };
 
-    // 2. LƯU BẢN NHÁP VÀO FIRESTORE
-    // Sử dụng setDoc để tạo hoặc ghi đè tài liệu.
-    // Tên collection: 'article_drafts'
-    // ID của document: userId (đảm bảo mỗi người dùng chỉ có một bản nháp)
-    await addDoc(collection(db, 'article_drafts'), draftData);
-
-    // 3. (Tùy chọn) Xóa các mục lưu trữ cục bộ cũ
-    localStorage.removeItem('article_draft');
-    localStorage.removeItem('article_draft_timestamp');
-
-    showToastMessage('Bản nháp đã được lưu thành công trên đám mây!', 'success');
-    
-  } catch (error) {
-    console.error('Lỗi khi lưu bản nháp lên Firebase:', error);
-    showToastMessage('Lỗi khi lưu bản nháp', 'error');
-  }
-};
+    loadArticleForEdit();
+  }, []);
 
   const handlePublish = async () => {
-  if (!articleData.title || !articleData.content) {
-    showToastMessage('Vui lòng điền đầy đủ tiêu đề và nội dung bài viết!', 'error');
-    return;
-  }
+    if (!articleData.title || !articleData.content) {
+      showToastMessage("Vui lòng điền đầy đủ tiêu đề và nội dung!", "error");
+      return;
+    }
 
-  try {
-    // 1. Chuẩn bị dữ liệu bài viết mới
-    // LƯU Ý: Firestore sẽ tự động tạo ID, nên ta không cần dùng Date.now().toString()
-    const newArticle = {
-      ...articleData,
-      // Sử dụng trường 'createdAt' để theo dõi thời gian xuất bản
-      publishedAt: new Date().toISOString(), 
-      status: 'published'
-    };
+    try {
+      const newArticle = {
+        ...articleData,
+        publishedAt: new Date().toISOString(),
+        status: "published"
+      };
 
-    // 2. LƯU BÀI VIẾT VÀO FIRESTORE
-    // Thêm document mới vào collection 'published_articles'
-    const docRef = await addDoc(collection(db, 'published_articles'), newArticle);
+      // --- UPDATE MODE ---
+      if (isEditing && articleData.id) {
+        await setDoc(
+          doc(db, "published_articles", articleData.id),
+          newArticle,
+          { merge: true }
+        );
+        showToastMessage("Bài viết đã được cập nhật!", "success");
+      }
 
-    // 3. (Tùy chọn) Dọn dẹp Draft cục bộ (nếu vẫn sử dụng localStorage cho Draft)
-    // Nếu bạn đang chuyển toàn bộ logic sang Firebase, bạn cũng có thể dọn dẹp Draft từ Firebase
-    localStorage.removeItem('article_draft');
-    localStorage.removeItem('article_draft_timestamp');
-    
-    // Kiểm tra ID mới được tạo
-    console.log("Bài viết đã được xuất bản với ID:", docRef.id);
+      // --- CREATE MODE ---
+      else {
+        const docRef = await addDoc(
+          collection(db, "published_articles"),
+          newArticle
+        );
+        console.log("New article ID:", docRef.id);
+        showToastMessage("Bài viết đã được xuất bản!", "success");
+      }
 
-    showToastMessage('Bài viết đã được xuất bản thành công!', 'success');
+      localStorage.removeItem("article_draft");
+      localStorage.removeItem("article_draft_timestamp");
 
-    // 4. Chuyển hướng
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
-  } catch (error) {
-    console.error('Lỗi khi xuất bản bài viết lên Firebase:', error);
-    showToastMessage('Lỗi khi xuất bản bài viết', 'error');
-  }
-};
+      setTimeout(() => navigate("/"), 1500);
+    } catch (error) {
+      console.error("Lỗi publish:", error);
+      showToastMessage("Lỗi khi xuất bản bài viết", "error");
+    }
+  };
 
   const handleClearDraft = () => {
     if (confirm('Bạn có chắc muốn xóa bản nháp này?')) {

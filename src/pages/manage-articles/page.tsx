@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../home/components/Navbar';
 import Footer from '../home/components/Footer';
-import { db } from '../../config/firebase'; 
-import { collection, query, getDocs, limit } from 'firebase/firestore';
+import { db, auth} from '../../config/firebase'; 
+import { collection, query, getDocs, limit, orderBy, doc, deleteDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 interface Article {
   id: string;
@@ -22,7 +23,7 @@ interface Article {
 export default function ManageArticles() {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<any[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -35,11 +36,13 @@ export default function ManageArticles() {
 
   // Check if user is logged in
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-      navigate('/login');
-      return;
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/login');
+      }
+    });
+
+    return () => unsubscribe();
   }, [navigate]);
 
   const categories = [
@@ -92,16 +95,24 @@ export default function ManageArticles() {
     filterAndSortArticles();
   }, [articles, searchQuery, selectedCategory, sortBy]);
 
-  const loadArticles = () => {
+  const loadArticles = async () => {
     try {
-      const stored = localStorage.getItem('published_articles');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setArticles(parsed);
-      }
+      const q = query(
+        collection(db, "published_articles"),
+        orderBy("publishedAt", "desc")
+      );
+
+      const snapshot = await getDocs(q);
+
+      const articlesData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      setArticles(articlesData);
     } catch (error) {
-      console.error('Error loading articles:', error);
-      showToastMessage('Lỗi khi tải danh sách bài viết', 'error');
+      console.error("Error loading articles:", error);
+      showToastMessage("Lỗi khi tải danh sách bài viết", "error");
     }
   };
 
@@ -148,15 +159,16 @@ export default function ManageArticles() {
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (!articleToDelete) return;
 
     try {
-      const updatedArticles = articles.filter(article => article.id !== articleToDelete);
-      localStorage.setItem('published_articles', JSON.stringify(updatedArticles));
-      setArticles(updatedArticles);
+      await deleteDoc(doc(db, 'published_articles', articleToDelete));
+
+      setArticles(prev => prev.filter(a => a.id !== articleToDelete));
       showToastMessage('Đã xóa bài viết thành công!', 'success');
     } catch (error) {
+      console.error(error);
       showToastMessage('Lỗi khi xóa bài viết', 'error');
     }
 
@@ -165,12 +177,8 @@ export default function ManageArticles() {
   };
 
   const handleEdit = (article: Article) => {
-    // Save article to draft for editing
-    localStorage.setItem('article_draft', JSON.stringify(article));
-    localStorage.setItem('editing_article_id', article.id);
-    navigate('/write');
+    navigate(`/write?id=${article.id}`);
   };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('vi-VN', {
       day: 'numeric',

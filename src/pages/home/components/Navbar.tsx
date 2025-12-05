@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { auth } from "../../../config/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 interface NavbarProps {
   isScrolled: boolean;
 }
@@ -12,25 +13,25 @@ export default function Navbar({ isScrolled }: { isScrolled: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = localStorage.getItem('currentUser');
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
-      try {
-        const userData = JSON.parse(user);
-        setIsLoggedIn(true);
-        setUserName(userData.name || userData.email);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
+      setIsLoggedIn(true);
+      setUserName(user.displayName ?? user.email ?? '');
+    } else {
+      setIsLoggedIn(false);
+      setUserName('');
     }
-  }, []);
+  });
 
-  const handleLogout = () => {
-    localStorage.removeItem('currentUser');
-    setIsLoggedIn(false);
-    setShowUserMenu(false);
-    navigate('/');
-  };
+  return () => unsubscribe();
+}, []);
+
+  const handleLogout = async () => {
+  await signOut(auth);
+  setShowUserMenu(false);
+  navigate('/');
+};
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>

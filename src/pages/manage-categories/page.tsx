@@ -3,6 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../home/components/Navbar';
 import Footer from '../home/components/Footer';
 
+import { db, auth} from '../../config/firebase'; 
+import { collection, query, getDocs, limit, orderBy, doc, deleteDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+
+
 interface Category {
   id: string;
   name: string;
@@ -59,12 +64,14 @@ export default function ManageCategories() {
   ];
 
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-      navigate('/login');
-      return;
-    }
-    loadCategories();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/login');
+      }
+      loadCategories();
+    });
+
+    return () => unsubscribe();
   }, [navigate]);
 
   useEffect(() => {

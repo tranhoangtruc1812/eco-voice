@@ -1,81 +1,70 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase"; // import auth firebase
+
 
 export default function Login() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     name: '',
     confirmPassword: ''
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // ========== LOGIN ==========
     if (isLogin) {
-      // Xử lý đăng nhập
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find((u: { email: string, password: string }) => 
-        u.email === formData.email && u.password === formData.password
-      );
-      
-      if (user) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
+      try {
+        await signInWithEmailAndPassword(auth, formData.email, formData.password);
+
         setNotification({ type: 'success', message: 'Đăng nhập thành công!' });
+
         setTimeout(() => {
           navigate('/write');
         }, 1500);
-      } else {
-        setNotification({ type: 'error', message: 'Email hoặc mật khẩu không đúng!' });
+
+      } catch (error: any) {
+        setNotification({ type: 'error', message: error.message });
       }
-    } else {
-      // Xử lý đăng ký
-      if (formData.password !== formData.confirmPassword) {
-        setNotification({ type: 'error', message: 'Mật khẩu xác nhận không khớp!' });
-        return;
-      }
-      
-      if (formData.password.length < 6) {
-        setNotification({ type: 'error', message: 'Mật khẩu phải có ít nhất 6 ký tự!' });
-        return;
-      }
-      
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const existingUser = users.find((u: { email: string }) => u.email === formData.email);
-      
-      if (existingUser) {
-        setNotification({ type: 'error', message: 'Email đã được sử dụng!' });
-        return;
-      }
-      
-      const newUser = {
-        id: Date.now().toString(),
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        createdAt: new Date().toISOString()
-      };
-      
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('currentUser', JSON.stringify(newUser));
-      
+      return;
+    }
+
+    // ========== REGISTER ==========
+    if (formData.password !== formData.confirmPassword) {
+      setNotification({ type: 'error', message: 'Mật khẩu xác nhận không khớp!' });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setNotification({ type: 'error', message: 'Mật khẩu phải có ít nhất 6 ký tự!' });
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+
       setNotification({ type: 'success', message: 'Đăng ký thành công!' });
+
       setTimeout(() => {
         navigate('/write');
       }, 1500);
+
+    } catch (error: any) {
+      setNotification({ type: 'error', message: error.message });
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (

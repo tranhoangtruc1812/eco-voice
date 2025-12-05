@@ -56,12 +56,6 @@ useEffect(() => {
             <Link to="/categories" className={`text-sm font-medium hover:text-emerald-700 transition-colors cursor-pointer ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
               Danh Mục
             </Link>
-            <Link to="/write" className={`text-sm font-medium hover:text-emerald-700 transition-colors cursor-pointer ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-              Đăng Bài
-            </Link>
-            <Link to="/manage" className={`text-sm font-medium hover:text-emerald-700 transition-colors cursor-pointer ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-              Quản Lý
-            </Link>
             <Link to="/contact" className={`text-sm font-medium hover:text-emerald-700 transition-colors cursor-pointer ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
               Liên Hệ
             </Link>

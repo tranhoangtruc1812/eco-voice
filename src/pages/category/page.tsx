@@ -19,74 +19,145 @@ interface Article {
 }
 
 const categoryInfo: Record<string, { name: string; description: string; icon: string; color: string; bgColor?: string }> = {
+  'loi-song-xanh': {
+    name: 'Lối Sống Xanh',
+    description: 'Khám phá cách sống thân thiện với môi trường trong cuộc sống hàng ngày',
+    icon: 'ri-leaf-line',
+    color: 'text-emerald-600',
+    bgColor: 'bg-emerald-50'
+  },
+  'bien-doi-khi-hau': {
+    name: 'Biến Đổi Khí Hậu',
+    description: 'Hiểu rõ về biến đổi khí hậu và tác động của nó đến hành tinh',
+    icon: 'ri-earth-line',
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-50'
+  },
+  'nang-luong-tai-tao': {
+    name: 'Năng Lượng Tái Tạo',
+    description: 'Tìm hiểu về các nguồn năng lượng sạch và bền vững',
+    icon: 'ri-sun-line',
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50'
+  },
+  'bao-ton-thien-nhien': {
+    name: 'Bảo Tồn Thiên Nhiên',
+    description: 'Bảo vệ đa dạng sinh học và các hệ sinh thái tự nhiên',
+    icon: 'ri-plant-line',
+    color: 'text-green-600',
+    bgColor: 'bg-green-50'
+  },
+  'giam-rac-thai': {
+    name: 'Giảm Rác Thải',
+    description: 'Giảm thiểu rác thải và tái chế hiệu quả',
+    icon: 'ri-recycle-line',
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-50'
+  },
+  'nong-nghiep-huu-co': {
+    name: 'Nông Nghiệp Hữu Cơ',
+    description: 'Phương pháp canh tác bền vững và thân thiện với môi trường',
+    icon: 'ri-seedling-line',
+    color: 'text-lime-600',
+    bgColor: 'bg-lime-50'
+  },
+  'giao-thong-xanh': {
+    name: 'Giao Thông Xanh',
+    description: 'Phương tiện và giải pháp giao thông thân thiện môi trường',
+    icon: 'ri-car-line',
+    color: 'text-cyan-600',
+    bgColor: 'bg-cyan-50'
+  },
+  'kien-truc-xanh': {
+    name: 'Kiến Trúc Xanh',
+    description: 'Thiết kế và xây dựng công trình bền vững',
+    icon: 'ri-building-line',
+    color: 'text-indigo-600',
+    bgColor: 'bg-indigo-50'
+  },
+  'xu-ly-chat-thai': {
+    name: 'Xử Lý Chất Thải',
+    description: 'Công nghệ và phương pháp xử lý chất thải hiệu quả',
+    icon: 'ri-delete-bin-line',
+    color: 'text-red-600',
+    bgColor: 'bg-red-50'
+  },
+  'cap-phep-giay-phep-moi-truong': {
+    name: 'Cấp Phép Giấy Phép Môi Trường',
+    description: 'Hướng dẫn về các quy định và giấy phép môi trường',
+    icon: 'ri-file-list-line',
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-50'
+  },
+  // Keep English slugs for backward compatibility
   'climate-change': {
     name: 'Biến Đổi Khí Hậu',
     description: 'Tìm hiểu về biến đổi khí hậu toàn cầu, nguyên nhân, tác động và các giải pháp ứng phó hiệu quả',
     icon: 'ri-temp-hot-line',
-    color: 'from-orange-500 to-red-500',
+    color: 'text-orange-600',
     bgColor: 'bg-orange-50'
   },
   'renewable-energy': {
     name: 'Năng Lượng Tái Tạo',
     description: 'Khám phá các nguồn năng lượng sạch như năng lượng mặt trời, gió, thủy điện và sinh khối',
     icon: 'ri-sun-line',
-    color: 'from-yellow-500 to-orange-500',
+    color: 'text-yellow-600',
     bgColor: 'bg-yellow-50'
   },
   'nature-conservation': {
     name: 'Bảo Tồn Thiên Nhiên',
     description: 'Bảo vệ đa dạng sinh học, hệ sinh thái và các loài động thực vật quý hiếm',
     icon: 'ri-leaf-line',
-    color: 'from-green-500 to-emerald-500',
+    color: 'text-green-600',
     bgColor: 'bg-green-50'
   },
   'pollution': {
     name: 'Ô Nhiễm Môi Trường',
     description: 'Nhận biết các dạng ô nhiễm không khí, nước, đất và cách giảm thiểu tác động',
     icon: 'ri-mist-line',
-    color: 'from-gray-500 to-slate-600',
+    color: 'text-gray-600',
     bgColor: 'bg-gray-50'
   },
   'sustainable-living': {
     name: 'Sống Bền Vững',
     description: 'Áp dụng lối sống thân thiện với môi trường trong cuộc sống hàng ngày',
     icon: 'ri-recycle-line',
-    color: 'from-teal-500 to-cyan-500',
+    color: 'text-teal-600',
     bgColor: 'bg-teal-50'
   },
   'ocean-protection': {
     name: 'Bảo Vệ Đại Dương',
     description: 'Giữ gìn đại dương, bảo vệ sinh vật biển và chống ô nhiễm nhựa',
     icon: 'ri-water-flash-line',
-    color: 'from-blue-500 to-indigo-500',
+    color: 'text-blue-600',
     bgColor: 'bg-blue-50'
   },
   'forest-protection': {
     name: 'Bảo Vệ Rừng',
     description: 'Chống phá rừng, trồng cây xanh và bảo vệ lá phổi xanh của hành tinh',
     icon: 'ri-plant-line',
-    color: 'from-lime-500 to-green-600',
+    color: 'text-lime-600',
     bgColor: 'bg-lime-50'
   },
   'recycling': {
     name: 'Tái Chế & Giảm Rác',
     description: 'Tái chế vật liệu, giảm thiểu rác thải và xây dựng nền kinh tế tuần hoàn',
     icon: 'ri-delete-bin-line',
-    color: 'from-emerald-500 to-teal-500',
+    color: 'text-emerald-600',
     bgColor: 'bg-emerald-50'
   },
   'waste-management': {
     name: 'Xử Lý Chất Thải',
     description: 'Quản lý và xử lý chất thải rắn, lỏng, khí một cách hiệu quả và an toàn',
     icon: 'ri-delete-bin-2-line',
-    color: 'from-amber-500 to-orange-600',
+    color: 'text-amber-600',
     bgColor: 'bg-amber-50'
   },
   'environmental-permits': {
     name: 'Cấp Phép Giấy Phép Môi Trường',
     description: 'Hướng dẫn thủ tục, quy định pháp lý về giấy phép môi trường cho doanh nghiệp',
     icon: 'ri-file-list-3-line',
-    color: 'from-indigo-500 to-blue-600',
+    color: 'text-indigo-600',
     bgColor: 'bg-indigo-50'
   }
 };
@@ -130,7 +201,7 @@ export default function Category() {
       setArticles(allArticles);
       
       if (slug) {
-        // Lọc bài viết theo slug của danh mục
+        // Lọc bài viết theo danh mục
         const filtered = allArticles.filter(article => {
           // Chuyển tên danh mục thành slug để so sánh
           const articleCategorySlug = article.category
@@ -141,6 +212,7 @@ export default function Category() {
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-+|-+$/g, '');
           
+          // So sánh với slug hiện tại
           return articleCategorySlug === slug;
         });
         setFilteredArticles(filtered);
@@ -181,11 +253,12 @@ export default function Category() {
   if (!currentCategory) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
+        <Navbar isScrolled={true} />
+        <div className="text-center pt-32">
           <i className="ri-error-warning-line text-6xl text-gray-400 mb-4"></i>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Không tìm thấy danh mục</h1>
-          <Link to="/" className="text-teal-600 hover:text-teal-700 cursor-pointer">
-            Quay về trang chủ
+          <Link to="/categories" className="text-teal-600 hover:text-teal-700 cursor-pointer whitespace-nowrap">
+            Quay về danh sách danh mục
           </Link>
         </div>
       </div>
@@ -194,7 +267,7 @@ export default function Category() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar isScrolled={isScrolled} />
+      <Navbar isScrolled={true} />
       
       {/* Hero Section */}
       <section className={`${currentCategory.bgColor || 'bg-gray-50'} pt-32 pb-20`}>
@@ -264,14 +337,14 @@ export default function Category() {
                 Chưa có bài viết nào
               </h3>
               <p className="text-gray-600 mb-6">
-                Hãy là người đầu tiên viết bài về chủ đề này!
+                Danh mục này chưa có bài viết nào. Hãy quay về trang chủ để khám phá thêm!
               </p>
               <Link
-                to="/write"
+                to="/"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition-colors cursor-pointer whitespace-nowrap"
               >
-                <i className="ri-edit-line"></i>
-                Viết Bài Ngay
+                <i className="ri-home-line"></i>
+                Quay Về Trang Chủ
               </Link>
             </div>
           ) : (

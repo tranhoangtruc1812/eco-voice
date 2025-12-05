@@ -95,18 +95,23 @@ export default function About() {
       <Navbar isScrolled={isScrolled} />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6">
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-gray opacity-50"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url('https://readdy.ai/api/search-image?query=modern%20industrial%20wastewater%20treatment%20facility%20with%20advanced%20filtration%20systems%20clean%20professional%20environment%20blue%20water%20treatment%20tanks%20environmental%20technology%20aerial%20view%20bright%20daylight%20professional%20photography&width=1920&height=800&seq=about-hero-bg-001&orientation=landscape')`
           }}
         ></div>
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Về Ecovoice
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Về WasteManage
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-white/95 leading-relaxed">
             Chúng tôi là đơn vị tiên phong trong lĩnh vực xử lý chất thải tại Việt Nam, 
             cung cấp giải pháp toàn diện từ tư vấn, thiết kế, thi công đến vận hành 
             hệ thống xử lý môi trường cho mọi quy mô doanh nghiệp
@@ -143,7 +148,7 @@ export default function About() {
             <div 
               className="w-full h-96 rounded-2xl shadow-2xl bg-cover bg-center"
               style={{
-                backgroundImage: `url('https://readdy.ai/api/search-image?query=engineers%20inspecting%20modern%20waste%20treatment%20facility%20team%20of%20professionals%20in%20safety%20gear%20checking%20industrial%20wastewater%20system%20advanced%20environmental%20technology%20clean%20industrial%20setting&width=600&height=600&seq=about-mission-001&orientation=squarish')`
+                backgroundImage: `url('https://readdy.ai/api/search-image?query=modern%20sustainable%20waste%20recycling%20facility%20with%20green%20technology%20solar%20panels%20eco-friendly%20industrial%20building%20clean%20environment%20blue%20sky%20professional%20architecture%20environmental%20innovation&width=600&height=600&seq=about-mission-002&orientation=squarish')`
               }}
             ></div>
           </div>
